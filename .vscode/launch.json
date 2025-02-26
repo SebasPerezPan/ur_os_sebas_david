@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "UR_OS debbug",
+            "request": "launch",
+            "mainClass": "${workspaceFolder}/src/ur_os/UR_OS.java",
+            
+            "stopOnEntry": false,
+            "stepFilters": {
+                "classExcludeFilters": [
+                    "java.*",
+                    "javax.*",
+                    "sun.*",
+                    "com.sun.*",
+                    "jdk.internal.*",
+                    "*.class"
+                ]
+            },
+            "skipFiles": [
+                "**/*.class"
+            ]
+        }
+        
+    ]
+}

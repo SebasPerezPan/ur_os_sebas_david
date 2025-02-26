@@ -1,0 +1,25 @@
+Codigo completo *.java
+
+ADICIONAL:
+
+Context Switches con Gant o contando los cambios de estado.
+
+
+Reporte
+
+
+Descripción del codigo de cada scheduler.
+
+Evidencias de resultado.
+
+Implementación completa:
+
+SJF NP:
+
+MFQ:
+
+SJF P:
+
+Round Robin:
+
+Terminar FCFS:
