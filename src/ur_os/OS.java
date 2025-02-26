@@ -19,7 +19,7 @@ public class OS {
     private static int process_count = 0;
     SystemOS system;
     CPU cpu;
-    public final SchedulerType SCHEDULER_TYPE = SchedulerType.FCFS;
+    public final SchedulerType SCHEDULER_TYPE = SchedulerType.SJF_P;
     public final TieBreakerType SCHEDULER_TIEBREAKER_TYPE = TieBreakerType.LARGEST_PID;
     
     public OS(SystemOS system, CPU cpu, IOQueue ioq){

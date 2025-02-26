@@ -6,10 +6,23 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PruebaArray",
+            "request": "launch",
+            "mainClass": "ur_os.PruebaArray",
+            "projectName": "ur_os_sebas_david_f377dd80"
+        },
+        {
+            "type": "java",
+            "name": "UR_OS",
+            "request": "launch",
+            "mainClass": "ur_os.UR_OS",
+            "projectName": "ur_os_sebas_david_f377dd80"
+        },
+        {
+            "type": "java",
             "name": "UR_OS debbug",
             "request": "launch",
             "mainClass": "${workspaceFolder}/src/ur_os/UR_OS.java",
-            
             "stopOnEntry": false,
             "stepFilters": {
                 "classExcludeFilters": [
@@ -25,6 +38,5 @@
                 "**/*.class"
             ]
         }
-        
     ]
 }

@@ -1,0 +1,20 @@
+Seria super interesante poder visualizar ademas del I/O y CPU, el Queue.
+
+***
+
+processes está asociado con el tipo ReadyQueue.
+
+Por esto, todos los procesos que la habitan, son los que están disponibles. 
+Para estar en esta lista debes estar en un Burst de tipo CPU.
+
+Hay que reordenarlas cada ciclo (update)
+
+***
+
+Interrupt
+
+Da una orden a CPU.
+
+RQ_TO_CPU ----> Carga un proceso a CPU
+
+CPU_TO_RQ ---> Saca un proceso de la CPU y lo devuelve a la cola. 
