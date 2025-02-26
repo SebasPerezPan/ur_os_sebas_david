@@ -38,7 +38,8 @@ public class SystemOS implements Runnable{
         processes = new ArrayList();
         //initSimulationQueue();
         //initSimulationQueueSimple();
-        initSimulationQueueSimpler2();
+        // initSimulationQueueSimpler2();
+        simulacionSJFNP0();
         showProcesses();
     }
     
@@ -191,33 +192,33 @@ public class SystemOS implements Runnable{
         clock = 0;
     }
 
-        public void simulacionSJFNP1(){
+        public void simulacionSJFNP0(){
 
         Process p = new Process(false);
         p.setPriority(0);
-        ProcessBurst temp = new ProcessBurst(5,ProcessBurstType.CPU);
+        ProcessBurst temp = new ProcessBurst(3,ProcessBurstType.CPU);
         p.addBurst(temp);
-        temp = new ProcessBurst(2,ProcessBurstType.IO);
+        temp = new ProcessBurst(4,ProcessBurstType.IO);
         p.addBurst(temp);
-        temp = new ProcessBurst(5,ProcessBurstType.CPU);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(0);
+        p.setPid(0);
+        processes.add(p);
+
+
+        p = new Process(false);
+        p.setPriority(0);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        temp = new ProcessBurst(3,ProcessBurstType.IO);
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);
         p.addBurst(temp);
         p.setTime_init(0);
         p.setPid(1);
         processes.add(p);
 
-
-        p = new Process(false);
-        p.setPriority(0);
-        temp = new ProcessBurst(4,ProcessBurstType.CPU);
-        p.addBurst(temp);
-        temp = new ProcessBurst(1,ProcessBurstType.IO);
-        p.addBurst(temp);
-        temp = new ProcessBurst(1,ProcessBurstType.CPU);
-        p.addBurst(temp);
-        p.setTime_init(1);
-        p.setPid(0);
-        processes.add(p);
-
         p = new Process(false);
         p.setPriority(0);
         temp = new ProcessBurst(3,ProcessBurstType.CPU);
@@ -226,7 +227,7 @@ public class SystemOS implements Runnable{
         p.addBurst(temp);
         temp = new ProcessBurst(3,ProcessBurstType.CPU);
         p.addBurst(temp);
-        p.setTime_init(2);
+        p.setTime_init(0);
         p.setPid(2);
         processes.add(p);
 
@@ -322,6 +323,7 @@ public class SystemOS implements Runnable{
     
     public void showProcesses(){
         System.out.println("Process list:");
+        System.out.println(os.SCHEDULER_TYPE);
         StringBuilder sb = new StringBuilder();
         
         for (Process process : processes) {

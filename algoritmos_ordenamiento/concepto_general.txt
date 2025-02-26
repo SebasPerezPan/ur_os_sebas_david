@@ -3,7 +3,7 @@ min_BTR (BurstRemainingTime) = TotalCycles**
 
 min_BTR_process = Null
 
-// No sabría enunciar el máximo.
+// No sabría enunciar el máximo. Podria ser el Max_sim_cycles.
 
 for Process as p in Processes:
 	temp = p.getBurstRemainingTime()
@@ -15,6 +15,11 @@ for Process as p in Processes:
 
 processes.remove(min_BTR_process) // Removemos.
 os.InterruptHandler(RQ_TO_CPU, min_BTR_process) // Ejecutamos.
+
+Scheduler_methods_SJF_NP:
+ReturnIO,New Process: 
+Interrupt CPU && getNext()
+
 
 Estructura Base:
 

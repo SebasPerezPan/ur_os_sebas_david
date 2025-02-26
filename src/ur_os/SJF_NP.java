@@ -33,7 +33,7 @@ public class SJF_NP extends Scheduler{
     public void getNext(boolean cpuEmpty) {
         if (!processes.isEmpty() && cpuEmpty){
             Process min_BTR_process = null;
-            int min_BTR = 9999;
+            int min_BTR = Integer.MAX_VALUE;
 
             for (Process p: processes){
                 if (p.isCurrentBurstCPU()){
@@ -47,13 +47,15 @@ public class SJF_NP extends Scheduler{
                     }
                 }
             }
+        if (min_BTR_process != null){
             os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, min_BTR_process);
             processes.remove(min_BTR_process);
-        }
+        }}
     }
-    
+    // os.ioq.processes Es la lista.
     @Override
-    public void newProcess(boolean cpuEmpty) {} //Non-preemtive
+    public void newProcess(boolean cpuEmpty) {
+    } //Non-preemtive
 
     @Override
     public void IOReturningProcess(boolean cpuEmpty) {} //Non-preemtive
