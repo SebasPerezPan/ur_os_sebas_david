@@ -39,7 +39,8 @@ public class SystemOS implements Runnable{
         //initSimulationQueue();
         //initSimulationQueueSimple();
         // initSimulationQueueSimpler2();
-        simulacionSJFNP0();
+        //simulacion_SJF_NP0();
+        simulacion_SJF_P0();
         showProcesses();
     }
     
@@ -192,7 +193,7 @@ public class SystemOS implements Runnable{
         clock = 0;
     }
 
-        public void simulacionSJFNP0(){
+        public void simulacion_SJF_NP0(){
 
         Process p = new Process(false);
         p.setPriority(0);
@@ -233,7 +234,47 @@ public class SystemOS implements Runnable{
 
         clock = 0;
     }
-    
+    public void simulacion_SJF_P0(){
+
+        Process p = new Process(false);
+        p.setPriority(0);
+        ProcessBurst temp = new ProcessBurst(6,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        temp = new ProcessBurst(4,ProcessBurstType.IO);
+        p.addBurst(temp);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(0);
+        p.setPid(0);
+        processes.add(p);
+
+
+        p = new Process(false);
+        p.setPriority(0);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        temp = new ProcessBurst(6,ProcessBurstType.IO);
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(2);
+        p.setPid(1);
+        processes.add(p);
+
+        p = new Process(false);
+        p.setPriority(0);
+        temp = new ProcessBurst(1,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        temp = new ProcessBurst(1,ProcessBurstType.IO);
+        p.addBurst(temp);
+        temp = new ProcessBurst(1,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(10);
+        p.setPid(2);
+        processes.add(p);
+
+        clock = 0;
+    }
     public boolean isSimulationFinished(){
         
         boolean finished = true;
@@ -245,7 +286,8 @@ public class SystemOS implements Runnable{
         return finished;
     
     }
-    
+
+
     
     @Override
     public void run() {

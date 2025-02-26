@@ -17,14 +17,19 @@ public class SJF_P extends Scheduler{
     
     @Override
     public void newProcess(boolean cpuEmpty){// When a NEW process enters the queue, process in CPU, if any, is extracted to compete with the rest
-        if (!cpuEmpty && os.getProcessInCPU() != null){
-       os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, os.getProcessInCPU());} // Así es que se interrumpe. Cuando haya un nuevo proceso implemente paramos, extraemos el proceso de la cpu.
-       getNext(false); // Luego forzamos la evaluación.
-    } 
+        if (!cpuEmpty && os.getProcessInCPU() != null)    {
+            System.out.println("********** NEWPROCESS_SEVAD  ***********");
+        os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, os.getProcessInCPU()); // Así es que se interrumpe. Cuando haya un nuevo proceso implemente paramos, extraemos el proceso de la cpu.
+       getNext(false);}} // Luego forzamos la evaluación.
+
 
     @Override
     public void IOReturningProcess(boolean cpuEmpty){// When a process return from IO and enters the queue, process in CPU, if any, is extracted to compete with the rest                
-    } 
+        if (!cpuEmpty && os.getProcessInCPU() != null)    {
+            System.out.println("********** IORETURNING_SEVAD  ***********");
+            os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, os.getProcessInCPU()); // Así es que se interrumpe. Cuando haya un nuevo proceso implemente paramos, extraemos el proceso de la cpu.
+            getNext(false);}} // Luego forzamos la evaluación.
+
     
    
     @Override

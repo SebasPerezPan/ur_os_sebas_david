@@ -118,8 +118,10 @@ public abstract class Scheduler {
         //The order in which process will be addedd to the ReadyQueue, based on the execution of the
         //simulator, is: New processes, Interrupted processed from CPU, Incomming process from I/O
         if(p.getState() == ProcessState.NEW){
+            //System.out.println("New Process");
             newProcess(os.isCPUEmpty()); //If the process is NEW, let the scheduler defines what it will do to update the queue to select the next
         }else if(p.getState() == ProcessState.IO){
+            //System.out.println("IoReturning");
             IOReturningProcess(os.isCPUEmpty()); //If the process is returning from IO, let the scheduler defines what it will do to update the queue to select the next
         }
         
