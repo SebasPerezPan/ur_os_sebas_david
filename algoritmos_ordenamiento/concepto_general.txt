@@ -1,0 +1,33 @@
+Scheduler_example_SJF:
+min_BTR (BurstRemainingTime) = TotalCycles**
+
+min_BTR_process = Null
+
+// No sabría enunciar el máximo.
+
+for Process as p in Processes:
+	temp = p.getBurstRemainingTime()
+	if temp < min_BTR:
+		min_BTR = temp
+		min_BTR_process = p
+	elif (temp == min_BTR):
+		Tie-Breaker.
+
+processes.remove(min_BTR_process) // Removemos.
+os.InterruptHandler(RQ_TO_CPU, min_BTR_process) // Ejecutamos.
+
+Estructura Base:
+
+Se revisan los Procesos que estén listos.
+Se comparan en base a los parametros - CicloCPU mas corto.
+Entra un procesos al CPU.
+Se proceso entero o es interrumpido.
+Va a I/O o Cola.
+Reinicia.
+
+
+
+Entonces, entra la cadena de objetos Process.
+REvisar los procesos. Y encontrar el que esté listo.
+Tiempo de Arranque / Bursts.
+Comparador
