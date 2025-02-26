@@ -8,3 +8,8 @@ request access via email (pedro.wightman@urosario.edu.co) and any application wi
 This simulator was created by Pedro Wightman, associate professor of the School of Engineering, Science and Technology at Universidad del Rosario, Bogota, Colombia.
 
 This program is a Netbeans 20 project compiled with Java 17. The project does not include external libraries apart from the JSE SDK package. 
+
+
+
+
+## git pull upstream main  
