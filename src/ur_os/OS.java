@@ -20,6 +20,13 @@ public class OS {
     SystemOS system;
     CPU cpu;
     public final SchedulerType SCHEDULER_TYPE = SchedulerType.SJF_P;
+    // FCFS,
+    // SJF_NP,
+    // SJF_P,
+    // RR,
+    // PRIORITY,
+    // MFQ,
+    // FAIR
     public final TieBreakerType SCHEDULER_TIEBREAKER_TYPE = TieBreakerType.LARGEST_PID;
     
     public OS(SystemOS system, CPU cpu, IOQueue ioq){
