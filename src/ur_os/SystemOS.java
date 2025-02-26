@@ -323,6 +323,7 @@ public class SystemOS implements Runnable{
     
     public void showProcesses(){
         System.out.println("Process list:");
+        System.out.println(os.SCHEDULER_TYPE);
         StringBuilder sb = new StringBuilder();
         
         for (Process process : processes) {

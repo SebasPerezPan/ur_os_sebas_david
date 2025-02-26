@@ -23,12 +23,7 @@ public class SJF_P extends Scheduler{
     } 
 
     @Override
-    public void IOReturningProcess(boolean cpuEmpty){// When a process return from IO and enters the queue, process in CPU, if any, is extracted to compete with the rest
-        Process currentProcess = os.getProcessInCPU();
-        if (!cpuEmpty && currentProcess != null){
-        os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, currentProcess);} // Estamos teniendo un problema de Null.
-        getNext(false); // Luego forzamos la evaluación. 
-                
+    public void IOReturningProcess(boolean cpuEmpty){// When a process return from IO and enters the queue, process in CPU, if any, is extracted to compete with the rest                
     } 
     
    
