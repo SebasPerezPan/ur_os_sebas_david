@@ -1,0 +1,17 @@
+FCFS
+
+Definir min_BTR = Max_sim_cycles  // Valor máximo inicial para comparar
+Definir min_BTR_process = NULL    // Variable para almacenar el proceso con menor Burst Time restante
+
+Para cada proceso p en la lista de procesos:
+    temp ← BurstRemainingTime(p)  // Obtener tiempo de ráfaga restante del proceso
+    
+    Si temp < min_BTR Entonces
+        min_BTR ← temp
+        min_BTR_process ← p
+    Sino Si temp = min_BTR Entonces
+        Aplicar criterio de desempate (Tie-Breaker)
+
+Si min_BTR_process ≠ NULL Entonces
+    Eliminar min_BTR_process de la lista de procesos
+    Llamar a InterruptHandler(RQ_TO_CPU, min_BTR_process)  // Asignar proceso a la CPU
