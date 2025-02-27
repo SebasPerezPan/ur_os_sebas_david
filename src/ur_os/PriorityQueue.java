@@ -6,6 +6,7 @@ package ur_os;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 
 /**
@@ -36,10 +37,25 @@ public class PriorityQueue extends Scheduler{
     public void addProcess(Process p){
        //Overwriting the parent's addProcess(Process p) method may be necessary in order to decide what to do with process coming from the CPU.
        //On which queue should the process go?
+
+       int priority = p.getPriority();
+        if (priority < schedulers.size()) {
+            schedulers.get(priority).addProcess(p);
+        } else {
+            schedulers.getLast().addProcess(p);
+        }
         
     }
     
     void defineCurrentScheduler(){
+        Optional<Scheduler> nextScheduler = schedulers.stream()
+            .filter(s -> !s.isEmpty())
+            .findFirst();
+            if (nextScheduler.isPresent()) {
+                currentScheduler = schedulers.indexOf(nextScheduler.get());
+            } else {
+                currentScheduler = -1;
+            }
         //This methos is suggested to help you find the scheduler that should be the next in line to provide processes... perhaps the one with process in the queue?
     }
     
@@ -51,6 +67,17 @@ public class PriorityQueue extends Scheduler{
         //Suggestion: if the CPU is empty, just find the next scheduler based on the order and the existence of processes
         //if the CPU is not empty, you need to define that will happen with the process... if it fully preemptive, and there are process pending in higher queue, does the
         //scheduler removes a process from the CPU or does it let it finish its quantum? Make this decision and justify it.
+
+        defineCurrentScheduler();
+
+        if (cpuEmpty && currentScheduler != -1) {
+            schedulers.get(currentScheduler).getNext(cpuEmpty);
+        } else {
+            defineCurrentScheduler();
+            if (currentScheduler != -1 && currentScheduler < schedulers.indexOf(os.getProcessInCPU().getPid() )) {
+                os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, null);
+            }
+        }
   
     }
     

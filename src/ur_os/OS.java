@@ -19,7 +19,7 @@ public class OS {
     private static int process_count = 0;
     SystemOS system;
     CPU cpu;
-    public final SchedulerType SCHEDULER_TYPE = SchedulerType.RR;
+    public final SchedulerType SCHEDULER_TYPE = SchedulerType.PRIORITY;
     // FCFS, 👍
     // SJF_NP,👍
     // SJF_P, 👍
