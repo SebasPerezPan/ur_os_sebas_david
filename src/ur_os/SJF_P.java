@@ -29,7 +29,6 @@ public class SJF_P extends Scheduler {
         if (!cpuEmpty && os.getProcessInCPU() != null) {
             System.out.println("********** IORETURNING_SEVAD  ***********");
             os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null); // Así es que se interrumpe. Cuando haya un nuevo proceso implemente paramos, extraemos el proceso de la cpu.
-            // getNext(true);
         }
     } // Luego forzamos la evaluación.
 
@@ -54,6 +53,7 @@ public class SJF_P extends Scheduler {
             if (min_BTR_process != null) {
                 os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, min_BTR_process);
                 processes.remove(min_BTR_process);
+                addContextSwitch();
             }
         }
     }

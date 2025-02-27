@@ -50,9 +50,9 @@ public class RoundRobin extends Scheduler{
                 getNext(true);
             }
             // 
-        } else{
-            cont = cont+1;
-        }
+            } else{
+                cont = cont+1;
+            }
          
 
         if (!processes.isEmpty() && cpuEmpty) {
@@ -74,6 +74,7 @@ public class RoundRobin extends Scheduler{
             if (min_BTR_process != null) {
                 os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, min_BTR_process);
                 processes.remove(min_BTR_process);
+                addContextSwitch();
             }
         }
 

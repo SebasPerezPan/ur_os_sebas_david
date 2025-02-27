@@ -50,6 +50,7 @@ public class SJF_NP extends Scheduler{
         if (min_BTR_process != null){
             os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, min_BTR_process);
             processes.remove(min_BTR_process);
+            addContextSwitch();
         }}
     }
     // os.ioq.processes Es la lista.

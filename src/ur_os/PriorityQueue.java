@@ -37,7 +37,6 @@ public class PriorityQueue extends Scheduler{
     public void addProcess(Process p){
        //Overwriting the parent's addProcess(Process p) method may be necessary in order to decide what to do with process coming from the CPU.
        //On which queue should the process go?
-
        int priority = p.getPriority();
         if (priority < schedulers.size()) {
             schedulers.get(priority).addProcess(p);

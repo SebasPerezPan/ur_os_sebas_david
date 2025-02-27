@@ -375,50 +375,80 @@ public class SystemOS implements Runnable{
     
     
     public double calcCPUUtilization(){
-       
-        
-        return 0;
+        int count = 0;
+
+        for (int num : execution) {
+            if (num != -1) {
+                count++;
+            }
+        }
+        return ((double) count / clock) * 100; 
     }
     
     public double calcTurnaroundTime(){
         
         double tot = 0;
-        
-       
-        
+        for(Process p: processes){
+            tot = tot + (p.getTime_finished() - p.getTime_init());
+        }
         return tot/processes.size();
     }
     
     public double calcThroughput(){
-        return 0;
+        return (double)processes.size()/(clock);
     }
     
     public double calcAvgWaitingTime(){
         double tot = 0;
-        
-        
+        for(Process p: processes){
+            tot = tot + (p.getTime_finished() - p.getTime_init());
+            
+        }
+        int count = 0;
+        for (int num : execution) {
+            if (num != -1) {
+                count++;
+            }
+        }
+        tot = tot - count;
         return tot/processes.size();
+
+        // return 0;
     }
     
     public double calcAvgContextSwitches(){
-        int cont = 1;
-        
-        
-        return (double)cont / processes.size();
+
+        int switches = 0;
+        for (int i = 1; i < execution.size(); i++) {
+            if (!execution.get(i).equals(execution.get(i - 1))) {
+                switches++;
+            }
+        }
+        return (double) switches / processes.size();
     }
 
     public double calcAvgContextSwitches2(){
-        int cont = 1;
-        
-        
-        return (double)cont / processes.size();
+         
+        return (double) os.rq.getTotalContextSwitches()/processes.size();
     }
 
 
     public double calcResponseTime(){
-       
+        int totalTime = 0;
+
+        for (Process p : processes) {
+            int responseTime = -1; 
         
-        return 0;
-    }
+            for (int i = 0; i < execution.size(); i++) {
+                if (execution.get(i) == p.pid && responseTime == -1) { 
+                    responseTime = i;
+                }
+            }
+            if (responseTime != -1) {
+                totalTime += (responseTime - p.time_init);
+            }
+        }
     
+        return (double) totalTime / processes.size();
+    }
 }
