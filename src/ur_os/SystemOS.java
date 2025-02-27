@@ -36,7 +36,8 @@ public class SystemOS implements Runnable{
         processes = new ArrayList();
         //initSimulationQueue();
         // initSimulationQueueSimple();
-        initSimulationQueueSimpler2();
+        // initSimulationQueueSimpler2();
+        initSimulationQueueSimpler3();
         // simulacion_SJF_NP0();
         // simulacion_SJF_P0();
         showProcesses();
@@ -304,6 +305,79 @@ public class SystemOS implements Runnable{
         clock = 0;
     }
 
+    public void initSimulationQueueSimpler3(){
+        
+        Process p = new Process(false);
+        p.setPid(0);
+        p.setTime_init(0);
+        p.setPriority(1);
+        ProcessBurst temp = new ProcessBurst(5,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(1,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(7,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(3,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        
+        processes.add(p);
+        
+        
+        p = new Process(false);
+        p.setPid(1);
+        p.setTime_init(4);
+        p.setPriority(0);
+        temp = new ProcessBurst(4,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(4,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        processes.add(p);
+        
+        p = new Process(false);
+        p.setPid(2);
+        p.setTime_init(6);
+        p.setPriority(0);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(4,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(5,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(5,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        processes.add(p);
+        
+        
+        p = new Process(false);
+        p.setPid(3);
+        p.setTime_init(9);
+        p.setPriority(2);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(3,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(4,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(1,ProcessBurstType.IO);    
+        p.addBurst(temp);
+        temp = new ProcessBurst(2,ProcessBurstType.CPU);    
+        p.addBurst(temp);
+        processes.add(p);
+        
+        clock = 0;
+    }
+    
+
     public boolean isSimulationFinished(){ 
         boolean finished = true;
         
@@ -442,8 +516,6 @@ public class SystemOS implements Runnable{
                 count++;
             }
         }
-
-        
         tot = tot - count;
         return tot/processes.size();
 
@@ -456,10 +528,8 @@ public class SystemOS implements Runnable{
         for (int i = 1; i < execution.size(); i++) {
             int current = execution.get(i);
             int previous = execution.get(i - 1);
-            if (current != previous) {
-                if (  current != -1 && previous != -1) {
-                    switches++;
-                }
+            if (current != previous && current != -1 && previous != -1) {
+                switches++;
             }
         }
         return (double) switches / processes.size();
@@ -467,16 +537,8 @@ public class SystemOS implements Runnable{
 
     public double calcAvgContextSwitches2(){
         
-        int switches = 0;
-        for (int i = 1; i < execution.size(); i++) {
-            int current = execution.get(i);
-            int previous = execution.get(i - 1);
-            if (current != previous) {
-                    switches++;
-            }
-        }
-        return (double) switches / processes.size();
-        // return (double) os.rq.getTotalContextSwitches()/processes.size();
+       
+        return (double) os.rq.getTotalContextSwitches()/processes.size();
     }
 
 

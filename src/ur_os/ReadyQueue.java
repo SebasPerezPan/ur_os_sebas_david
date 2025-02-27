@@ -33,7 +33,7 @@ public class ReadyQueue {
                 break;
             
             case RR:
-                s = new RoundRobin(os,4);
+                s = new RoundRobin(os,6);
                 break;
             
             case PRIORITY:

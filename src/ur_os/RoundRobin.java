@@ -58,6 +58,7 @@ public class RoundRobin extends Scheduler{
             addContextSwitch();
         }
     }
+    
     public void getNext_other(boolean cpuEmpty) {
         if(cont==q){
             if (!cpuEmpty && os.getProcessInCPU() != null) {
