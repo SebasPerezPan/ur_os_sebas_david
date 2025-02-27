@@ -19,13 +19,14 @@ public class OS {
     private static int process_count = 0;
     SystemOS system;
     CPU cpu;
-    public final SchedulerType SCHEDULER_TYPE = SchedulerType.SJF_P;
-    // FCFS,
-    // SJF_NP,
-    // SJF_P,
-    // RR,
+    public final SchedulerType SCHEDULER_TYPE = SchedulerType.RR;
+    // FCFS, 👍
+    // SJF_NP,👍
+    // SJF_P, 👍
+    // RR,👍
     // PRIORITY,
     // MFQ,
+
     // FAIR
     public final TieBreakerType SCHEDULER_TIEBREAKER_TYPE = TieBreakerType.LARGEST_PID;
     

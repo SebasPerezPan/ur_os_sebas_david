@@ -6,9 +6,7 @@
 package ur_os;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  *
@@ -39,7 +37,7 @@ public class SystemOS implements Runnable{
         //initSimulationQueue();
         //initSimulationQueueSimple();
         // initSimulationQueueSimpler2();
-        //simulacion_SJF_NP0();
+        // simulacion_SJF_NP0();
         simulacion_SJF_P0();
         showProcesses();
     }
@@ -275,8 +273,7 @@ public class SystemOS implements Runnable{
 
         clock = 0;
     }
-    public boolean isSimulationFinished(){
-        
+    public boolean isSimulationFinished(){ 
         boolean finished = true;
         
         for (Process p : processes) {
