@@ -420,16 +420,29 @@ public class SystemOS implements Runnable{
 
         int switches = 0;
         for (int i = 1; i < execution.size(); i++) {
-            if (!execution.get(i).equals(execution.get(i - 1))) {
-                switches++;
+            int current = execution.get(i);
+            int previous = execution.get(i - 1);
+            if (current != previous) {
+                if (  current != -1 && previous != -1) {
+                    switches++;
+                }
             }
         }
         return (double) switches / processes.size();
     }
 
     public double calcAvgContextSwitches2(){
-         
-        return (double) os.rq.getTotalContextSwitches()/processes.size();
+        
+        int switches = 0;
+        for (int i = 1; i < execution.size(); i++) {
+            int current = execution.get(i);
+            int previous = execution.get(i - 1);
+            if (current != previous) {
+                    switches++;
+            }
+        }
+        return (double) switches / processes.size();
+        // return (double) os.rq.getTotalContextSwitches()/processes.size();
     }
 
 

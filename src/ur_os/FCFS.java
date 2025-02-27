@@ -22,6 +22,7 @@ public class FCFS extends Scheduler{
             Process p = processes.get(0);
             processes.remove();
             os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, p);
+            addContextSwitch();
         }
     }
 
