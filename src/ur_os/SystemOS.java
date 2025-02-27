@@ -35,10 +35,11 @@ public class SystemOS implements Runnable{
         execution = new ArrayList();
         processes = new ArrayList();
         //initSimulationQueue();
-        //initSimulationQueueSimple();
+        initSimulationQueueSimple();
         // initSimulationQueueSimpler2();
-        // simulacion_SJF_NP0();
-        simulacion_SJF_P0();
+        //simulacion_SJF_NP0();
+        //simulacion_SJF_P0();
+        //simulacion_FCFS0();
         showProcesses();
     }
     
@@ -267,12 +268,43 @@ public class SystemOS implements Runnable{
         p.addBurst(temp);
         temp = new ProcessBurst(1,ProcessBurstType.CPU);
         p.addBurst(temp);
-        p.setTime_init(10);
+        p.setTime_init(6);
         p.setPid(2);
         processes.add(p);
 
         clock = 0;
     }
+
+    public void simulacion_FCFS0(){
+
+        Process p = new Process(false);
+        p.setPriority(0);
+        ProcessBurst temp = new ProcessBurst(10,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(0);
+        p.setPid(0);
+        processes.add(p);
+
+
+        p = new Process(false);
+        p.setPriority(0);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(2);
+        p.setPid(1);
+        processes.add(p);
+
+        p = new Process(false);
+        p.setPriority(0);
+        temp = new ProcessBurst(3,ProcessBurstType.CPU);
+        p.addBurst(temp);
+        p.setTime_init(4);
+        p.setPid(2);
+        processes.add(p);
+
+        clock = 0;
+    }
+
     public boolean isSimulationFinished(){ 
         boolean finished = true;
         
@@ -350,6 +382,8 @@ public class SystemOS implements Runnable{
         System.out.println("");
         
         System.out.println("******Performance Indicators******");
+        System.out.println("The Scheduling method is: " + os.SCHEDULER_TYPE);
+
         System.out.println("Total execution cycles: "+clock);
         System.out.println("CPU Utilization: "+this.calcCPUUtilization());
         System.out.println("Throughput: "+this.calcThroughput());
@@ -362,7 +396,6 @@ public class SystemOS implements Runnable{
     
     public void showProcesses(){
         System.out.println("Process list:");
-        System.out.println(os.SCHEDULER_TYPE);
         StringBuilder sb = new StringBuilder();
         
         for (Process process : processes) {
