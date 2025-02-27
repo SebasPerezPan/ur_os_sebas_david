@@ -35,10 +35,10 @@ public class SystemOS implements Runnable{
         execution = new ArrayList();
         processes = new ArrayList();
         //initSimulationQueue();
-        //initSimulationQueueSimple();
-        // initSimulationQueueSimpler2();
+        // initSimulationQueueSimple();
+        initSimulationQueueSimpler2();
         // simulacion_SJF_NP0();
-        simulacion_SJF_P0();
+        // simulacion_SJF_P0();
         showProcesses();
     }
     
@@ -410,6 +410,8 @@ public class SystemOS implements Runnable{
                 count++;
             }
         }
+
+        
         tot = tot - count;
         return tot/processes.size();
 

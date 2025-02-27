@@ -40,7 +40,14 @@ public class RoundRobin extends Scheduler{
    
     @Override
     public void getNext(boolean cpuEmpty) {
-        
+        if (!cpuEmpty ) {
+            cont += 1;
+            if (cont == q) {
+            os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
+            cpuEmpty = true;
+            // getNext(true);
+            }
+        }
 
         if(!processes.isEmpty() && cpuEmpty)
         {   
@@ -50,7 +57,6 @@ public class RoundRobin extends Scheduler{
             os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, p);
             addContextSwitch();
         }
-
     }
 
 
@@ -59,17 +65,14 @@ public class RoundRobin extends Scheduler{
         
 
         if(cont==q){
-
-            resetCounter();
             if (!cpuEmpty && os.getProcessInCPU() != null) {
                 os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
                 getNext(true);
-                
             }
-            // 
-            } else{
+            
+        } else{
                 cont = cont+1;
-            }
+        }
          
 
         if (!processes.isEmpty() && cpuEmpty) {
@@ -89,6 +92,7 @@ public class RoundRobin extends Scheduler{
                 }
             }
             if (min_BTR_process != null) {
+                resetCounter();
                 os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, min_BTR_process);
                 processes.remove(min_BTR_process);
                 addContextSwitch();

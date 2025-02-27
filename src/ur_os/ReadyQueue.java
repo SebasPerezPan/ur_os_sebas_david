@@ -5,8 +5,6 @@
  */
 package ur_os;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author super
@@ -46,8 +44,7 @@ public class ReadyQueue {
                 s = new MFQ(os,new RoundRobin(os,3),new RoundRobin(os,6),new FCFS(os));
                 break;
                 
-            case FAIR   :
-                
+            case FAIR:
                 break;
         }
         
