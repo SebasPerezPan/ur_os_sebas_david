@@ -58,12 +58,7 @@ public class RoundRobin extends Scheduler{
             addContextSwitch();
         }
     }
-
-
-
     public void getNext_other(boolean cpuEmpty) {
-        
-
         if(cont==q){
             if (!cpuEmpty && os.getProcessInCPU() != null) {
                 os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
@@ -78,7 +73,6 @@ public class RoundRobin extends Scheduler{
         if (!processes.isEmpty() && cpuEmpty) {
             Process min_BTR_process = null;
             int min_BTR = Integer.MAX_VALUE;
-
             for (Process p : processes) {
                 if (p.isCurrentBurstCPU()) {
                     int temp = p.getRemainingTimeInCurrentBurst();
@@ -87,7 +81,6 @@ public class RoundRobin extends Scheduler{
                         min_BTR_process = p;
                     } else if (temp == min_BTR) {
                         min_BTR_process = tieBreaker(min_BTR_process, p);
-
                     }
                 }
             }
