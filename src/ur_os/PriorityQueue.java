@@ -73,7 +73,7 @@ public class PriorityQueue extends Scheduler{
             schedulers.get(currentScheduler).getNext(cpuEmpty);
         } else {
             defineCurrentScheduler();
-            if (currentScheduler != -1 && currentScheduler < schedulers.indexOf(os.getProcessInCPU().getPid() )) {
+            if (currentScheduler != -1 && currentScheduler < schedulers.indexOf(os.getProcessInCPU().getPriority() )) {
                 os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, null);
             }
         }
