@@ -36,8 +36,8 @@ public class SystemOS implements Runnable{
         processes = new ArrayList();
         //initSimulationQueue();
         // initSimulationQueueSimple();
-        // initSimulationQueueSimpler2();
-        initSimulationQueueSimpler3();
+        initSimulationQueueSimpler2();
+        // initSimulationQueueSimpler3();
         // simulacion_SJF_NP0();
         // simulacion_SJF_P0();
         showProcesses();
@@ -461,9 +461,11 @@ public class SystemOS implements Runnable{
         System.out.println("CPU Utilization: "+this.calcCPUUtilization());
         System.out.println("Throughput: "+this.calcThroughput());
         System.out.println("Average Turnaround Time: "+this.calcTurnaroundTime());
+        
         System.out.println("Average Waiting Time: "+this.calcAvgWaitingTime());
         System.out.println("Average Context Switches (solo Gantt): "+this.calcAvgContextSwitches());
         System.out.println("Average Context Switches (completo): "+this.calcAvgContextSwitches2());
+
         System.out.println("Average Response Time: "+this.calcResponseTime());
     }
     

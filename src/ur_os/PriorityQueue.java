@@ -40,10 +40,11 @@ public class PriorityQueue extends Scheduler{
        int priority = p.getPriority();
         if (priority < schedulers.size()) {
             schedulers.get(priority).addProcess(p);
-        } else {
-            schedulers.getLast().addProcess(p);
-        }
-        
+        } 
+        // else {
+        //     schedulers.get(schedulers.size()).addProcess(p);
+        //     // schedulers.getLast().addProcess(p);
+        // }
     }
     
     void defineCurrentScheduler(){
