@@ -40,15 +40,18 @@ public class RoundRobin extends Scheduler{
    
     @Override
     public void getNext(boolean cpuEmpty) {
+
         if (!cpuEmpty ) {
             cont += 1;
             if (cont == q) {
                 if (this.singlequeue) {
+                    addContextSwitch();
                     os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
                     cpuEmpty = true;
                     // getNext(true);
                 }else {
-                    os.cpu.removeProcess();
+                    // os.cpu.removeProcess();
+                    os.interrupt(InterruptType.SCHEDULER_CPU_TO_RQ, null);
                     addContextSwitch();
                 }
             }
@@ -97,8 +100,7 @@ public class RoundRobin extends Scheduler{
                 addContextSwitch();
             }
         }
-
-        
+  
     }
     
     

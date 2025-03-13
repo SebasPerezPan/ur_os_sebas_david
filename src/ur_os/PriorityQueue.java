@@ -41,10 +41,10 @@ public class PriorityQueue extends Scheduler{
         if (priority < schedulers.size()) {
             schedulers.get(priority).addProcess(p);
         } 
-        // else {
-        //     schedulers.get(schedulers.size()).addProcess(p);
-        //     // schedulers.getLast().addProcess(p);
-        // }
+        else {
+            schedulers.get(schedulers.size()).addProcess(p);
+            // schedulers.getLast().addProcess(p);
+        }
     }
     
     void defineCurrentScheduler(){
@@ -54,8 +54,8 @@ public class PriorityQueue extends Scheduler{
             if (nextScheduler.isPresent()) {
                 currentScheduler = schedulers.indexOf(nextScheduler.get());
             } else {
-                currentScheduler = -1;
-            }
+                currentScheduler = schedulers.size() - 1;
+            } 
         //This methos is suggested to help you find the scheduler that should be the next in line to provide processes... perhaps the one with process in the queue?
     }
     
@@ -69,14 +69,23 @@ public class PriorityQueue extends Scheduler{
         //scheduler removes a process from the CPU or does it let it finish its quantum? Make this decision and justify it.
 
         defineCurrentScheduler();
-
+        // if (!cpuEmpty){
+        //     os.cpu.removeProcess();
+        // }
         if (cpuEmpty && currentScheduler != -1) {
-            schedulers.get(currentScheduler).getNext(cpuEmpty);
+            schedulers.get(currentScheduler).getNext(os.isCPUEmpty());
+            addContextSwitch();
         } else {
             defineCurrentScheduler();
-            if (currentScheduler != -1 && currentScheduler < schedulers.indexOf(os.getProcessInCPU().getPriority() )) {
-                os.interrupt(InterruptType.SCHEDULER_RQ_TO_CPU, null);
+            if ( currentScheduler == os.getProcessInCPU().getPriority() ) {
+                schedulers.get(currentScheduler).getNext(os.isCPUEmpty());
+                if (os.isCPUEmpty()){
+                    addContextSwitch();
+                    defineCurrentScheduler();
+                    schedulers.get(currentScheduler).getNext(os.isCPUEmpty());
+                }
             }
+            
         }
   
     }

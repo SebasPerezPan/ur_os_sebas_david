@@ -13,7 +13,7 @@ import java.util.Random;
  * @author super
  */
 public class SystemOS implements Runnable{
-    
+    private static int time_out = 0;
     private static int clock = 0;
     private static final int MAX_SIM_CYCLES = 1000;
     private static final int MAX_SIM_PROC_CREATION_TIME = 50;
@@ -462,7 +462,7 @@ public class SystemOS implements Runnable{
         System.out.println("Throughput: "+this.calcThroughput());
         System.out.println("Average Turnaround Time: "+this.calcTurnaroundTime());
         
-        System.out.println("Average Waiting Time: "+this.calcAvgWaitingTime());
+        System.out.println("Average Waiting Time: "+this.calcAvgWaitingTime()); // TODO:
         System.out.println("Average Context Switches (solo Gantt): "+this.calcAvgContextSwitches());
         System.out.println("Average Context Switches (completo): "+this.calcAvgContextSwitches2());
 
@@ -528,12 +528,11 @@ public class SystemOS implements Runnable{
 
         int switches = 0;
         for (int i = 1; i < execution.size(); i++) {
-            int current = execution.get(i);
-            int previous = execution.get(i - 1);
-            if (current != previous && current != -1 && previous != -1) {
+            if (!execution.get(i).equals(execution.get(i - 1))) {
                 switches++;
             }
         }
+
         return (double) switches / processes.size();
     }
 
